@@ -3,66 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tic‑Tac‑Toe (Drei gewinnt)</title>
-  <style>
-    :root{
-      --bg:#0f1226; --panel:rgba(255,255,255,.08); --text:#eaeaff; --muted:#a7adcb; --accent:#7c5cff; --accent-2:#56d1ff; --x:#7c5cff; --o:#56d1ff; --win:#40d67a;
-    }
-    *{box-sizing:border-box}
-    body{
-      margin:0; min-height:100vh; display:grid; place-items:center; color:var(--text);
-      background: radial-gradient(60% 60% at 30% 20%, #1a1f4e 0%, rgba(26,31,78,0) 60%),
-                  radial-gradient(40% 40% at 80% 80%, #0e4b6e 0%, rgba(14,75,110,0) 60%),
-                  linear-gradient(180deg, #0b0e22, #0f1226);
-      font-family: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      padding:20px;
-    }
-    .app{
-      width:min(94vw, 520px); padding:18px; border-radius:22px; position:relative;
-      background:var(--panel); border:1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 20px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.06);
-    }
-    header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px}
-    .title{font-weight:800; letter-spacing:.3px}
-    .status{color:var(--muted)}
-    .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:10px}
-    .cell{
-      aspect-ratio:1; border-radius:16px; border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      box-shadow: 0 8px 18px rgba(0,0,0,.35);
-      display:grid; place-items:center; font-size: clamp(36px, 12vw, 54px); font-weight:900; cursor:pointer;
-      transition: transform .05s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
-      color:var(--text);
-    }
-    .cell:focus-visible{ outline:2px solid var(--accent-2); outline-offset:2px }
-    .cell:active{ transform: translateY(1px); box-shadow: 0 5px 12px rgba(0,0,0,.35); }
-    .cell.x{ color: var(--x); }
-    .cell.o{ color: var(--o); }
-    .cell.win{ border-color: var(--win); box-shadow: 0 0 0 2px rgba(64,214,122,.4), 0 10px 20px rgba(0,0,0,.45); }
-
-    .controls{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px }
-    button.btn{ border:1px solid rgba(255,255,255,.12); background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06)); color:var(--text);
-      padding:10px 14px; border-radius:12px; cursor:pointer; font-weight:700 }
-    button.btn:hover{ filter:brightness(1.05) }
-    button.btn:active{ transform: translateY(1px) }
-
-    .score{ display:flex; gap:14px; margin-top:10px; color:var(--muted); font-weight:700 }
-    .score .x{ color:var(--x)}
-    .score .o{ color:var(--o)}
-
-    footer{margin-top:10px; color:var(--muted); font-size:.9rem}
-  </style>
+  <title>Tic-Tac-Toe (Drei gewinnt)</title>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  <main class="app" role="application" aria-label="Tic‑Tac‑Toe">
+  <main class="app" role="application" aria-label="Tic-Tac-Toe">
     <header>
-      <div class="title">Tic‑Tac‑Toe <span style="opacity:.7">(Drei gewinnt)</span></div>
+      <div class="title">Tic-Tac-Toe <span style="opacity:.7">(Drei gewinnt)</span></div>
       <div id="status" class="status" aria-live="polite">Am Zug: X</div>
     </header>
-
     <section class="grid" id="grid" role="grid" aria-label="Spielfeld 3×3">
-      <!-- 9 Buttons -->
       <button class="cell" role="gridcell" aria-label="Feld 1 leer" data-index="0"></button>
       <button class="cell" role="gridcell" aria-label="Feld 2 leer" data-index="1"></button>
       <button class="cell" role="gridcell" aria-label="Feld 3 leer" data-index="2"></button>
@@ -73,139 +23,21 @@
       <button class="cell" role="gridcell" aria-label="Feld 8 leer" data-index="7"></button>
       <button class="cell" role="gridcell" aria-label="Feld 9 leer" data-index="8"></button>
     </section>
-
     <div class="controls">
       <button id="restart" class="btn" title="Neue Runde">Neu starten</button>
       <button id="undo" class="btn" title="Letzten Zug zurücknehmen">Rückgängig</button>
       <button id="clearScore" class="btn" title="Punkte zurücksetzen">Punkte löschen</button>
     </div>
-
     <div class="score" aria-label="Punktestand">
       <div>🏆 <span class="x">X</span>: <span id="scoreX">0</span></div>
       <div>🏆 <span class="o">O</span>: <span id="scoreO">0</span></div>
       <div>🤝 Unentschieden: <span id="scoreD">0</span></div>
     </div>
-
-    <footer>Hinweis: Funktioniert super auf Handy und Desktop. Benutze auch die Tastatur: 1–9 zum Setzen, R für „Neu starten“, Z für „Rückgängig“.</footer>
+    <footer>
+      Hinweis: Funktioniert super auf Handy und Desktop. Benutze auch die Tastatur:
+      1–9 zum Setzen, R für „Neu starten“, Z für „Rückgängig“.
+    </footer>
   </main>
-
-  <script>
-    (function(){
-      const grid = document.getElementById('grid');
-      const cells = Array.from(grid.querySelectorAll('.cell'));
-      const status = document.getElementById('status');
-      const btnRestart = document.getElementById('restart');
-      const btnUndo = document.getElementById('undo');
-      const btnClearScore = document.getElementById('clearScore');
-      const scoreXEl = document.getElementById('scoreX');
-      const scoreOEl = document.getElementById('scoreO');
-      const scoreDEl = document.getElementById('scoreD');
-
-      const WIN = [
-        [0,1,2],[3,4,5],[6,7,8],
-        [0,3,6],[1,4,7],[2,5,8],
-        [0,4,8],[2,4,6]
-      ];
-
-      let board, current, over, history;
-      let scoreX = 0, scoreO = 0, scoreD = 0;
-
-      function init(){
-        board = Array(9).fill(null);
-        current = 'X';
-        over = false;
-        history = [];
-        cells.forEach((c,i)=>{
-          c.textContent = '';
-          c.classList.remove('x','o','win');
-          c.disabled = false;
-          c.setAttribute('aria-label', `Feld ${i+1} leer`);
-        });
-        setStatus(`Am Zug: ${current}`);
-      }
-
-      function setStatus(text){ status.textContent = text; }
-      function updateScore(){ scoreXEl.textContent = scoreX; scoreOEl.textContent = scoreO; scoreDEl.textContent = scoreD; }
-
-      function place(i){
-        if (over || board[i]) return;
-        board[i] = current;
-        history.push(i);
-        const cell = cells[i];
-        cell.textContent = current;
-        cell.classList.add(current.toLowerCase());
-        cell.setAttribute('aria-label', `Feld ${i+1}: ${current}`);
-
-        const line = getWinLine();
-        if (line){
-          line.forEach(idx=>cells[idx].classList.add('win'));
-          over = true;
-          setStatus(`${current} hat gewonnen!`);
-          if (current === 'X') scoreX++; else scoreO++;
-          updateScore();
-          disableAll();
-          return;
-        }
-        if (board.every(Boolean)){
-          over = true;
-          setStatus(`Unentschieden!`);
-          scoreD++; updateScore(); disableAll(); return;
-        }
-        current = current === 'X' ? 'O' : 'X';
-        setStatus(`Am Zug: ${current}`);
-      }
-
-      function getWinLine(){
-        for (const [a,b,c] of WIN){
-          if (board[a] && board[a] === board[b] && board[a] === board[c]) return [a,b,c];
-        }
-        return null;
-      }
-
-      function disableAll(){ cells.forEach(c=>c.disabled=true); }
-
-      function restart(){ init(); }
-
-      function undo(){
-        if (history.length === 0) return;
-        if (over){ // wenn Spiel vorbei war, reaktiviere
-          over = false; cells.forEach(c=>c.disabled=false); cells.forEach(c=>c.classList.remove('win'));
-        }
-        const last = history.pop();
-        board[last] = null;
-        const cell = cells[last];
-        cell.textContent = '';
-        cell.classList.remove('x','o');
-        cell.setAttribute('aria-label', `Feld ${last+1} leer`);
-        current = current === 'X' ? 'O' : 'X';
-        setStatus(`Am Zug: ${current}`);
-      }
-
-      // Maus/Touch
-      grid.addEventListener('click', (e)=>{
-        const btn = e.target.closest('.cell');
-        if (!btn) return;
-        const i = Number(btn.dataset.index);
-        place(i);
-      });
-
-      // Tastatur: 1–9 entsprechen den Feldern
-      window.addEventListener('keydown', (e)=>{
-        const k = e.key.toLowerCase();
-        if (k >= '1' && k <= '9'){
-          const i = Number(k) - 1; place(i); return;
-        }
-        if (k === 'r') { restart(); return; }
-        if (k === 'z') { undo(); return; }
-      });
-
-      btnRestart.addEventListener('click', restart);
-      btnUndo.addEventListener('click', undo);
-      btnClearScore.addEventListener('click', ()=>{ scoreX=0; scoreO=0; scoreD=0; updateScore(); });
-
-      // Start
-      init(); updateScore();
-    })();
-  </script>
+  <script src="./script.js" defer></script>
 </body>
 </html>
