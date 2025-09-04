@@ -1,19 +1,16 @@
 :root{
-  /* Colors */
   --bg:#0f1226; --panel:rgba(255,255,255,.08); --text:#eaeaff; --muted:#a7adcb;
   --accent:#7c5cff; --accent-2:#56d1ff; --x:#7c5cff; --o:#56d1ff; --win:#40d67a;
 }
-/* Page: center app + solid background */
 *{box-sizing:border-box}
 body{
   margin:0; min-height:100vh;
-  display:flex; justify-content:center; align-items:center; /* center both axes */
-  background: var(--bg); /* simple solid background */
+  display:flex; justify-content:center; align-items:center; 
+  background: var(--bg); 
   color:var(--text);
   font-family: ui-rounded, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  padding:20px; /* small safe padding on tiny screens */
+  padding:20px; 
 }
-/* App card */
 .app{
   width:min(94vw, 520px); padding:18px; border-radius:22px; position:relative;
   background:var(--panel); border:1px solid rgba(255,255,255,.12);
@@ -23,7 +20,6 @@ body{
 header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px}
 .title{font-weight:800; letter-spacing:.3px}
 .status{color:var(--muted)}
-/* Grid */
 .grid{display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; margin-top:10px}
 .cell{
   aspect-ratio:1; border-radius:16px; border:1px solid rgba(255,255,255,.12);
@@ -38,7 +34,6 @@ header{display:flex; align-items:center; justify-content:space-between; gap:12px
 .cell.x{ color: var(--x); }
 .cell.o{ color: var(--o); }
 .cell.win{ border-color: var(--win); box-shadow: 0 0 0 2px rgba(64,214,122,.4), 0 10px 20px rgba(0,0,0,.45); }
-/* Controls */
 .controls{ display:flex; flex-wrap:wrap; gap:8px; margin-top:14px }
 button.btn{
   border:1px solid rgba(255,255,255,.12);
@@ -47,7 +42,6 @@ button.btn{
 }
 button.btn:hover{ filter:brightness(1.05) }
 button.btn:active{ transform: translateY(1px) }
-/* Score */
 .score{ display:flex; gap:14px; margin-top:10px; color:var(--muted); font-weight:700 }
 .score .x{ color:var(--x)}
 .score .o{ color:var(--o)}
