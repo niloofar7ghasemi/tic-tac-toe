@@ -77,25 +77,20 @@
     cell.setAttribute('aria-label', `Feld ${last+1} leer`);
     current = current === 'X' ? 'O' : 'X';
     setStatus(`Am Zug: ${current}`);
-  }
-  // Mouse/Touch
-  grid.addEventListener('click', (e)=>{
+  }  grid.addEventListener('click', (e)=>{
     const btn = e.target.closest('.cell');
     if (!btn) return;
     const i = Number(btn.dataset.index);
     place(i);
   });
-  // Keyboard: 1–9 map to cells; R restart; Z undo
   window.addEventListener('keydown', (e)=>{
     const k = e.key.toLowerCase();
     if (k >= '1' && k <= '9'){ place(Number(k)-1); return; }
     if (k === 'r') { restart(); return; }
     if (k === 'z') { undo(); return; }
   });
-  // Buttons
   document.getElementById('restart').addEventListener('click', restart);
   document.getElementById('undo').addEventListener('click', undo);
   document.getElementById('clearScore').addEventListener('click', ()=>{ scoreX=0; scoreO=0; scoreD=0; updateScore(); });
-  // Start
   init(); updateScore();
 })();
